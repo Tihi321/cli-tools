@@ -41,14 +41,13 @@ if "%1"=="activate" (
 
 REM Function to check if a virtual environment is activated
 if "%1"=="check" (
-    for %%i in ("%PATH:;=" "%") do (
-        if exist "%%i\python.exe" (
-            echo Virtual environment '%%~nxi' is activated.
-            exit /b 0
-        )
+    if defined VIRTUAL_ENV (
+        echo Virtual environment '%VIRTUAL_ENV%' is activated.
+        exit /b 0
+    ) else (
+        echo No virtual environment is currently activated.
+        exit /b 1
     )
-    echo No virtual environment is currently activated.
-    exit /b 0
 )
 
 REM Function to deactivate a virtual environment
@@ -85,7 +84,7 @@ if "%1"=="update" (
 )
 
 REM Function to display help information about the script
-if "%1"=="help" (
+if "%1"=="--help" (
     echo Commands:
     echo create name - Create a virtual environment with the specified name
     echo activate [name] - Activate a virtual environment, optionally by name
@@ -99,7 +98,7 @@ if "%1"=="help" (
 )
 
 REM Function to display the version
-if "%1"=="version" (
+if "%1"=="--version" (
     echo version %version%
     exit /b 0
 )
@@ -112,6 +111,6 @@ echo virenv check - check if a virtual environment is activated and return its n
 echo virenv deactivate - deactivate current virtual environment
 echo virenv install - install requirements from requirements.txt
 echo virenv update - update packages from requirements.txt
-echo virenv help - display script help information
-echo virenv version - display script version
+echo virenv --help - display script help information
+echo virenv --version - display script version
 exit /b 1

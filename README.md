@@ -17,8 +17,8 @@ The `virenv.bat` script provides several commands to manage Python virtual envir
 - `virenv deactivate`: Deactivate the current virtual environment.
 - `virenv install`: Install requirements from `requirements.txt` in the current directory.
 - `virenv update`: Update packages from `requirements.txt` in the current directory.
-- `virenv help`: Display help information about the script.
-- `virenv version`: Display the script version.
+- `virenv --help`: Display help information about the script.
+- `virenv --version`: Display the script version.
 
 ## Examples
 
