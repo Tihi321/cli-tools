@@ -7,23 +7,83 @@ This repository contains a script `virenv.bat` that can be added to your environ
 1. Clone this repository to your local machine.
 2. Add the `scripts` directory to your system's PATH environment variable.
 
+# VIRENV
+
+## Commands
+
+- `create name` - Create a virtual environment with the specified name
+- `activate [name]` - Activate a virtual environment, optionally by name
+- `check` - Check if a virtual environment is activated and return its name
+- `install` - Install requirements from `requirements.txt`
+- `update` - Update packages from `requirements.txt`
+- `list` - List installed packages in the activated virtual environment
+- `freeze` - Check all packages in the activated virtual environment and populate `requirements.txt`
+- `init` - Add `virenv` function to PowerShell profile
+- `help` - Display this help information
+- `version` - Display the script version
+
 ## Usage
 
-The `virenv.bat` script provides several commands to manage Python virtual environments:
+### Initialize
 
-- `virenv create <name>`: Create a virtual environment with the specified name.
-- `virenv activate [name]`: Activate a virtual environment, optionally by name. If no name is provided, it will search for a virtual environment in the current directory.
-- `virenv check`: Check if a virtual environment is activated and return its name.
-- `virenv deactivate`: Deactivate the current virtual environment.
-- `virenv install`: Install requirements from `requirements.txt` in the current directory.
-- `virenv update`: Update packages from `requirements.txt` in the current directory.
-- `virenv --help`: Display help information about the script.
-- `virenv --version`: Display the script version.
-
-## Examples
-
-### Create a Virtual Environment
+To set up the `virenv` function in your PowerShell profile, run:
 
 ```sh
-virenv create myenv
+virenv init
+```
+
+### Create a virtual environment
+
+To create a new virtual environment with the name `my-env`, run:
+
+```sh
+virenv create my-env
+```
+
+### Activate a Virtual Environment
+
+To activate a virtual environment, run:
+
+```sh
+virenv activate my-env
+```
+
+### Install Requirements
+
+To install requirements from requirements.txt, run:
+
+```sh
+virenv install
+```
+
+### Update Requirements
+
+To update packages from requirements.txt, run:
+
+```sh
+virenv update
+```
+
+### List Installed Packages
+
+To list installed packages in the activated virtual environment, run:
+
+```sh
+virenv list
+```
+
+### Freeze Requirements
+
+To check all packages in the activated virtual environment and populate requirements.txt, run:
+
+```sh
+virenv freeze
+```
+
+### Deactivate a Virtual Environment
+
+To deactivate a virtual environment, simply run:
+
+```sh
+deactivate
 ```

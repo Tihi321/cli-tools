@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 REM Version of the script
-set "version=1.1.0"
+set "version=1.1.1"
 
 REM Function to create a virtual environment
 if "%1"=="create" (
@@ -42,17 +42,6 @@ if "%1"=="activate" (
 REM Function to check if a virtual environment is activated
 if "%1"=="check" (
     python "%~dp0virenv_check.py"
-    exit /b 0
-)
-
-REM Function to deactivate a virtual environment
-if "%1"=="deactivate" (
-    if defined VIRTUAL_ENV (
-        call deactivate
-        echo Virtual environment deactivated.
-    ) else (
-        echo No virtual environment is currently activated.
-    )
     exit /b 0
 )
 
@@ -109,8 +98,8 @@ if "%~1"=="--version" (
 )
 
 REM Function to setup virenv in PowerShell profile
-if "%1"=="setup" (
-    call :setup_powershell_profile
+if "%1"=="init" (
+    call :init_powershell_profile
     exit /b 0
 )
 
@@ -122,15 +111,16 @@ exit /b 1
 echo Commands:
 echo create name - Create a virtual environment with the specified name
 echo activate [name] - Activate a virtual environment, optionally by name
-echo check - Check if a virtual environment is activated and return its name
-echo deactivate - Deactivate the current virtual environment
 echo install - Install requirements from requirements.txt
 echo update - Update packages from requirements.txt
 echo list - list installed packages in the activated virtual environment
 echo freeze - Check all packages in the activated virtual environment and populate requirements.txt
-echo setup - Add virenv function to PowerShell profile
+echo init - Add virenv function to PowerShell profile
 echo help - Display this help information
 echo version - Display the script version
+echo ---------
+echo Environment commands, used without virenv command:
+echo deactivate - Deactivates current environment
 exit /b
 
 :display_version
@@ -142,7 +132,7 @@ echo Invalid command. Use one of the following:
 call :display_help
 exit /b
 
-:setup_powershell_profile
+:init_powershell_profile
 REM Determine the path to the PowerShell profile
 for /f "delims=" %%a in ('powershell -NoProfile -Command "$PROFILE"') do set "profile=%%a"
 
