@@ -8,7 +8,8 @@ This repository contains a scripts that can be added to your environment paths f
 2. Add the `scripts` directory to your system's PATH environment variable.
 3. Run the script `add_to_path.bat` in terminal.
 4. Open a new terminal window or restart your current one.
-5. To remove scripts, run the script `remove_from_path.bat` or manually remove the `scripts` directory from your system' PATH environment variable.
+5. run virenv init to add priviledges to script for powershell, important for powershell so it can add environment to current session.
+6. To remove scripts, run the script `remove_from_path.bat` or manually remove the `scripts` directory from your system' PATH environment variable.
 
 ## Scripts
 
