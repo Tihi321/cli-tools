@@ -41,19 +41,15 @@ if "%1"=="activate" (
 
 REM Function to check if a virtual environment is activated
 if "%1"=="check" (
-    if defined VIRTUAL_ENV (
-        echo Virtual environment '%VIRTUAL_ENV%' is activated.
-        exit /b 0
-    ) else (
-        echo No virtual environment is currently activated.
-        exit /b 1
-    )
+    python "%~dp0virenv_check.py"
+    exit /b 0
 )
+
 
 REM Function to deactivate a virtual environment
 if "%1"=="deactivate" (
     if defined VIRTUAL_ENV (
-        deactivate
+        call deactivate
         echo Virtual environment deactivated.
     ) else (
         echo No virtual environment is currently activated.
