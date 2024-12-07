@@ -37,7 +37,8 @@ function virenv {
         }
     }
     else {
-        & .\virenv.bat $Command $Name
+        # Call the global virenv.bat from PATH
+        & "virenv.bat" $Command $Name
     }
 }
 '@
