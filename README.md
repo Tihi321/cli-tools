@@ -36,8 +36,8 @@ This repository contains a scripts that can be added to your environment paths f
 - `update` - Update packages from `requirements.txt`
 - `list` - List installed packages in the activated virtual environment
 - `freeze` - Check all packages in the activated virtual environment and populate `requirements.txt`
-- `add [package-name]` - Add a package to `requirements.txt`
-- `remove [package-name]` - Remove a package from `requirements.txt`
+- `add [package-name]` - Installs and adds to `requirements.txt`
+- `remove [package-name]` - Uninstall and removes a package from `requirements.txt`
 - `init` - Add `virenv` function to PowerShell profile
 - `--help` - Display this help information
 - `--version` - Display the script version
