@@ -1,4 +1,4 @@
-# cmd-commands
+# cli-tools
 
 This repository contains a script `virenv.bat` that can be added to your environment paths for Windows, allowing you to manage Python virtual environments directly from the command line.
 
