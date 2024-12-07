@@ -116,8 +116,8 @@ echo update - Update packages from requirements.txt
 echo list - list installed packages in the activated virtual environment
 echo freeze - Check all packages in the activated virtual environment and populate requirements.txt
 echo init - Add virenv function to PowerShell profile
-echo help - Display this help information
-echo version - Display the script version
+echo --help - Display this help information
+echo --version - Display the script version
 echo ---------
 echo Environment commands, used without virenv command:
 echo deactivate - Deactivates current environment
