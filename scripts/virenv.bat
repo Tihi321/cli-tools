@@ -45,7 +45,6 @@ if "%1"=="check" (
     exit /b 0
 )
 
-
 REM Function to deactivate a virtual environment
 if "%1"=="deactivate" (
     if defined VIRTUAL_ENV (
@@ -109,6 +108,12 @@ if "%~1"=="--version" (
     exit /b 0
 )
 
+REM Function to setup virenv in PowerShell profile
+if "%1"=="setup" (
+    call :setup_powershell_profile
+    exit /b 0
+)
+
 REM If no valid command is provided
 call :invalid_command
 exit /b 1
@@ -123,6 +128,7 @@ echo install - Install requirements from requirements.txt
 echo update - Update packages from requirements.txt
 echo list - list installed packages in the activated virtual environment
 echo freeze - Check all packages in the activated virtual environment and populate requirements.txt
+echo setup - Add virenv function to PowerShell profile
 echo help - Display this help information
 echo version - Display the script version
 exit /b
@@ -135,3 +141,12 @@ exit /b
 echo Invalid command. Use one of the following:
 call :display_help
 exit /b
+
+:setup_powershell_profile
+REM Determine the path to the PowerShell profile
+for /f "delims=" %%a in ('powershell -NoProfile -Command "$PROFILE"') do set "profile=%%a"
+
+REM Call the PowerShell setup script
+powershell -ExecutionPolicy RemoteSigned -File "%~dp0virenv_setup.ps1" -ProfilePath "%profile%"
+
+exit /b 0
