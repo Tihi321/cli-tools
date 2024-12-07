@@ -18,9 +18,11 @@ This repository contains a script `virenv.bat` that can be added to your environ
 - `update` - Update packages from `requirements.txt`
 - `list` - List installed packages in the activated virtual environment
 - `freeze` - Check all packages in the activated virtual environment and populate `requirements.txt`
+- `add [package-name]` - Add a package to `requirements.txt`
+- `remove [package-name]` - Remove a package from `requirements.txt`
 - `init` - Add `virenv` function to PowerShell profile
-- `help` - Display this help information
-- `version` - Display the script version
+- `--help` - Display this help information
+- `--version` - Display the script version
 
 ## Usage
 
@@ -45,7 +47,7 @@ virenv create my-env
 To activate a virtual environment, run:
 
 ```sh
-virenv activate my-env
+virenv activate
 ```
 
 ### Install Requirements
@@ -54,30 +56,6 @@ To install requirements from requirements.txt, run:
 
 ```sh
 virenv install
-```
-
-### Update Requirements
-
-To update packages from requirements.txt, run:
-
-```sh
-virenv update
-```
-
-### List Installed Packages
-
-To list installed packages in the activated virtual environment, run:
-
-```sh
-virenv list
-```
-
-### Freeze Requirements
-
-To check all packages in the activated virtual environment and populate requirements.txt, run:
-
-```sh
-virenv freeze
 ```
 
 ### Deactivate a Virtual Environment

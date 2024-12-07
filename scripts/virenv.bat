@@ -85,6 +85,37 @@ if "%1"=="freeze" (
     )
 )
 
+REM Function to add a package to requirements.txt
+if "%1"=="add" (
+    if "%2"=="" (
+        echo Please provide the name of the package to add.
+        exit /b 1
+    )
+    pip install %2
+    if not exist "requirements.txt" (
+        echo %2 > requirements.txt
+    ) else (
+        echo %2 >> requirements.txt
+    )
+    echo Package '%2' added to requirements.txt.
+    exit /b 0
+)
+
+REM Function to remove a package from requirements.txt
+if "%1"=="remove" (
+    if "%2"=="" (
+        echo Please provide the name of the package to remove.
+        exit /b 1
+    )
+    pip uninstall -y %2
+    if exist "requirements.txt" (
+        findstr /v /i "%2" requirements.txt > temp.txt
+        move /y temp.txt requirements.txt > nul
+    )
+    echo Package '%2' removed from requirements.txt.
+    exit /b 0
+)
+
 REM Function to display help information about the script
 if "%~1"=="--help" (
     call :display_help
@@ -115,6 +146,8 @@ echo install - Install requirements from requirements.txt
 echo update - Update packages from requirements.txt
 echo list - list installed packages in the activated virtual environment
 echo freeze - Check all packages in the activated virtual environment and populate requirements.txt
+echo add [package-name] - Add a package to requirements.txt
+echo remove [package-name] - Remove a package from requirements.txt
 echo init - Add virenv function to PowerShell profile
 echo --help - Display this help information
 echo --version - Display the script version
