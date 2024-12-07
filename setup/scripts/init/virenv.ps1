@@ -1,10 +1,10 @@
 param (
-  [string]$ProfilePath
+    [string]$ProfilePath
 )
 
 if (-Not (Test-Path $ProfilePath)) {
-  Write-Output "Creating PowerShell profile at $ProfilePath"
-  New-Item -ItemType File -Path $ProfilePath -Force | Out-Null
+    Write-Output "Creating PowerShell profile at $ProfilePath"
+    New-Item -ItemType File -Path $ProfilePath -Force | Out-Null
 }
 
 $functionDefinition = @'
@@ -45,11 +45,11 @@ function virenv {
 
 # Check if the virenv function already exists in the profile
 if (Get-Content -Path $ProfilePath | Select-String -Pattern "function virenv") {
-  Write-Output "virenv function is already present in the PowerShell profile."
+    Write-Output "virenv function is already present in the PowerShell profile."
 }
 else {
-  Add-Content -Path $ProfilePath -Value "`n"  # Add a new line for separation
-  Add-Content -Path $ProfilePath -Value $functionDefinition
-  Write-Output "virenv function added to the PowerShell profile."
-  Write-Output "Please restart PowerShell or run '. `$PROFILE' to apply the changes."
+    Add-Content -Path $ProfilePath -Value "`n"  # Add a new line for separation
+    Add-Content -Path $ProfilePath -Value $functionDefinition
+    Write-Output "virenv function added to the PowerShell profile."
+    Write-Output "Please restart PowerShell or run '. `$PROFILE' to apply the changes."
 }

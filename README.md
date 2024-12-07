@@ -2,19 +2,20 @@
 
 This repository contains a scripts that can be added to your environment paths for Windows.
 
+## Scripts
+
+- `setup.bat` - Add the `scripts` directory to your system' PATH environment variable and add configuration needed for scripts.
+- `cleanup.bat` - Remove the `scripts` directory from your system' PATH environment variable and cleans up configuration form scripts.
+
 ## Setup
 
 1. Clone this repository to your local machine.
-2. Add the `scripts` directory to your system's PATH environment variable.
-3. Run the script `add_to_path.bat` in terminal.
-4. Open a new terminal window or restart your current one.
-5. run virenv init to add priviledges to script for powershell, important for powershell so it can add environment to current session.
-6. To remove scripts, run the script `remove_from_path.bat` or manually remove the `scripts` directory from your system' PATH environment variable.
+2. Run the script `setup.bat` in terminal.
+3. Open a new terminal window or restart your current one.
 
-## Scripts
+## Remove
 
-- `add_to_path.bat` - Add the `scripts` directory to your system' PATH environment variable.
-- `remove_from_path.bat` - Remove the `scripts` directory from your system' PATH environment variable.
+2. Run the script `cleanup.bat`.
 
 ## Manualy adding paths:
 
@@ -39,19 +40,10 @@ This repository contains a scripts that can be added to your environment paths f
 - `freeze` - Check all packages in the activated virtual environment and populate `requirements.txt`
 - `add [package-name]` - Installs and adds to `requirements.txt`
 - `remove [package-name]` - Uninstall and removes a package from `requirements.txt`
-- `init` - Add `virenv` function to PowerShell profile
 - `--help` - Display this help information
 - `--version` - Display the script version
 
 ### Usage
-
-#### Initialize
-
-To set up the `virenv` function in your PowerShell profile, run:
-
-```sh
-virenv init
-```
 
 #### Create a virtual environment
 
