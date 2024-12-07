@@ -7,6 +7,19 @@ This repository contains a scripts that can be added to your environment paths f
 - `setup.bat` - Add the `scripts` directory to your system' PATH environment variable and add configuration needed for scripts.
 - `cleanup.bat` - Remove the `scripts` directory from your system' PATH environment variable and cleans up configuration form scripts.
 
+## Disclaimer:
+
+IMPORTANT: This script is not tested on Windows 10 or older. It should work but use it at your own risk!
+Script for adding path is tested on Windows 11. Please backup your system' PATH variable before running this script. Check manual way of adding for safety.
+
+## Manualy adding paths:
+
+- On Windows, open the "System Properties" window and click on the "Advanced system settings..." button.
+- Click on the "Environment Variables..." button.
+- Click on the "Path" variable and click on the "Edit..." button.
+- Click on "New" and add the path of the `scripts` directory.
+- Click OK until you return back to the main window.
+
 ## Setup
 
 1. Clone this repository to your local machine.
@@ -16,14 +29,6 @@ This repository contains a scripts that can be added to your environment paths f
 ## Remove
 
 2. Run the script `cleanup.bat`.
-
-## Manualy adding paths:
-
-- On Windows, open the "System Properties" window and click on the "Advanced system settings..." button.
-- Click on the "Environment Variables..." button.
-- Click on the "Path" variable and click on the "Edit..." button.
-- Click on "New" and add the path of the `scripts` directory.
-- Click OK until you return back to the main window.
 
 # Tools
 
