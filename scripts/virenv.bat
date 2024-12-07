@@ -83,34 +83,59 @@ if "%1"=="update" (
     exit /b 0
 )
 
+REM Function to list installed packages
+if "%1"=="list" (
+    pip list
+    exit /b 0
+)
+
+REM Function to check all packages in the activated virtual environment and populate requirements.txt
+if "%1"=="freeze" (
+    if defined VIRTUAL_ENV (
+        pip freeze > requirements.txt
+        echo requirements.txt has been populated with the installed packages.
+        exit /b 0
+    ) else (
+        echo No virtual environment is currently activated.
+        exit /b 1
+    )
+)
+
 REM Function to display help information about the script
-if "%1"=="--help" (
-    echo Commands:
-    echo create name - Create a virtual environment with the specified name
-    echo activate [name] - Activate a virtual environment, optionally by name
-    echo check - Check if a virtual environment is activated and return its name
-    echo deactivate - Deactivate the current virtual environment
-    echo install - Install requirements from requirements.txt
-    echo update - Update packages from requirements.txt
-    echo help - Display this help information
-    echo version - Display the script version
+if "%~1"=="--help" (
+    call :display_help
     exit /b 0
 )
 
 REM Function to display the version
-if "%1"=="--version" (
-    echo version %version%
+if "%~1"=="--version" (
+    call :display_version
     exit /b 0
 )
 
 REM If no valid command is provided
-echo Invalid command. Use one of the following:
-echo virenv create name - create virtual environment with that name
-echo virenv activate [name] - activate virtual environment, optionally by name
-echo virenv check - check if a virtual environment is activated and return its name
-echo virenv deactivate - deactivate current virtual environment
-echo virenv install - install requirements from requirements.txt
-echo virenv update - update packages from requirements.txt
-echo virenv --help - display script help information
-echo virenv --version - display script version
+call :invalid_command
 exit /b 1
+
+:display_help
+echo Commands:
+echo create name - Create a virtual environment with the specified name
+echo activate [name] - Activate a virtual environment, optionally by name
+echo check - Check if a virtual environment is activated and return its name
+echo deactivate - Deactivate the current virtual environment
+echo install - Install requirements from requirements.txt
+echo update - Update packages from requirements.txt
+echo list - list installed packages in the activated virtual environment
+echo freeze - Check all packages in the activated virtual environment and populate requirements.txt
+echo help - Display this help information
+echo version - Display the script version
+exit /b
+
+:display_version
+echo version %version%
+exit /b
+
+:invalid_command
+echo Invalid command. Use one of the following:
+call :display_help
+exit /b
