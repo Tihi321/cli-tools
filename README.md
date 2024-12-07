@@ -90,4 +90,4 @@ deactivate
 
 ## Contact
 
-- [<Tihomir Selak>](https://github.com/Tihi321)
+- [Tihomir Selak](https://github.com/Tihi321)
