@@ -146,8 +146,8 @@ echo install - Install requirements from requirements.txt
 echo update - Update packages from requirements.txt
 echo list - list installed packages in the activated virtual environment
 echo freeze - Check all packages in the activated virtual environment and populate requirements.txt
-echo add [package-name] - Add a package to requirements.txt
-echo remove [package-name] - Remove a package from requirements.txt
+echo add [package-name] - Installs and adds a package to requirements.txt
+echo remove [package-name] - Uninstalls and removes a package from requirements.txt
 echo init - Add virenv function to PowerShell profile
 echo --help - Display this help information
 echo --version - Display the script version
