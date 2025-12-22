@@ -82,6 +82,53 @@ To deactivate a virtual environment, simply run:
 deactivate
 ```
 
+## VITASKS
+
+A CLI tool for managing processes running on specific ports.
+
+#### Commands
+
+- `listall` - List all processes with open ports (shows name, path, and port)
+- `list [port]` - List all processes running on the specified port (shows name, path, and PID)
+- `find [name]` - Find all processes matching the specified name (shows name, path, port, and PID)
+- `stop [port]` - Stop all processes running on the specified port
+- `--help` - Display this help information
+- `--version` - Display the script version
+
+### Usage
+
+#### List all processes with ports
+
+To list all processes that have open ports:
+
+```sh
+vitasks listall
+```
+
+#### List processes on a port
+
+To list all processes running on port 3000 (with name and path):
+
+```sh
+vitasks list 3000
+```
+
+#### Find processes by name
+
+To find all processes with "node" in the name:
+
+```sh
+vitasks find node
+```
+
+#### Stop processes on a port
+
+To kill all processes running on port 8080:
+
+```sh
+vitasks stop 8080
+```
+
 ## License
 
 [MIT](https://opensource.org/license/mit)
