@@ -116,6 +116,17 @@ if "%1"=="remove" (
     exit /b 0
 )
 
+REM Function to deactivate a virtual environment
+if "%1"=="deactivate" (
+    if not defined VIRTUAL_ENV (
+        echo No virtual environment is currently activated.
+        exit /b 1
+    )
+    endlocal
+    call deactivate
+    exit /b 0
+)
+
 REM Function to update Python path in virtual environment
 if "%1"=="updatepy" (
     call :do_updatepy %2
@@ -148,12 +159,10 @@ echo list - list installed packages in the activated virtual environment
 echo freeze - Check all packages in the activated virtual environment and populate requirements.txt
 echo add [package-name] - Install and adds a package to requirements.txt
 echo remove [package-name] - Uninstall and removes a package from requirements.txt
+echo deactivate - Deactivate the current virtual environment
 echo updatepy [path] - Update Python path in a virtual environment (auto-detects if no path given)
 echo --help - Display this help information
 echo --version - Display the script version
-echo ---------
-echo Environment commands, used without virenv command:
-echo deactivate - Deactivates current environment
 exit /b
 
 :display_version

@@ -45,6 +45,7 @@ Script for adding path is tested on Windows 11. Please backup your system' PATH 
 - `freeze` - Check all packages in the activated virtual environment and populate `requirements.txt`
 - `add [package-name]` - Installs and adds to `requirements.txt`
 - `remove [package-name]` - Uninstall and removes a package from `requirements.txt`
+- `deactivate` - Deactivate the current virtual environment
 - `updatepy [path]` - Update Python path in a virtual environment (auto-detects if no path given)
 - `--help` - Display this help information
 - `--version` - Display the script version
@@ -91,10 +92,10 @@ virenv updatepy myenv
 
 #### Deactivate a Virtual Environment
 
-To deactivate a virtual environment, simply run:
+To deactivate a virtual environment, run:
 
 ```sh
-deactivate
+virenv deactivate
 ```
 
 ## VITASKS
