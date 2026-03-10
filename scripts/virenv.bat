@@ -202,7 +202,7 @@ echo Error: No system Python found in PATH.
 exit /b 1
 :got_python
 for %%F in ("!new_python!") do set "new_home=%%~dpF"
-if "!new_home:~-1!"=="\" set "new_home=!new_home:~0,-1!"
+set "new_home=!new_home:~0,-1!"
 echo New Python home:     !new_home!
 echo.
 if /i "!old_home!"=="!new_home!" (
