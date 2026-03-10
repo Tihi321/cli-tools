@@ -45,6 +45,7 @@ Script for adding path is tested on Windows 11. Please backup your system' PATH 
 - `freeze` - Check all packages in the activated virtual environment and populate `requirements.txt`
 - `add [package-name]` - Installs and adds to `requirements.txt`
 - `remove [package-name]` - Uninstall and removes a package from `requirements.txt`
+- `updatepy [path]` - Update Python path in a virtual environment (defaults to `.venv` or `venv`)
 - `--help` - Display this help information
 - `--version` - Display the script version
 
@@ -74,6 +75,20 @@ To install requirements from requirements.txt, run:
 virenv install
 ```
 
+#### Update Python path in virtual environment
+
+When your system Python path changes (e.g. after a Python upgrade), update the virtual environment to point to the new path:
+
+```sh
+virenv updatepy
+```
+
+To target a specific virtual environment:
+
+```sh
+virenv updatepy myenv
+```
+
 #### Deactivate a Virtual Environment
 
 To deactivate a virtual environment, simply run:
@@ -92,7 +107,6 @@ A CLI tool for managing processes running on specific ports.
 - `list [port]` - List all processes running on the specified port (shows name, path, and PID)
 - `find [name]` - Find all processes matching the specified name (shows name, path, port, and PID)
 - `stop [port]` - Stop all processes running on the specified port
-- `updatepy [path]` - Update Python path in a virtual environment (defaults to `.venv` or `venv`)
 - `--help` - Display this help information
 - `--version` - Display the script version
 
@@ -128,20 +142,6 @@ To kill all processes running on port 8080:
 
 ```sh
 vitasks stop 8080
-```
-
-#### Update Python path in virtual environment
-
-When your system Python path changes (e.g. after a Python upgrade), update the virtual environment to point to the new path:
-
-```sh
-vitasks updatepy
-```
-
-To target a specific virtual environment:
-
-```sh
-vitasks updatepy myenv
 ```
 
 ## License

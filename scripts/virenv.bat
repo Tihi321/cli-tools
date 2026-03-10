@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 REM Version of the script
-set "version=1.1.1"
+set "version=1.2.0"
 
 REM Function to create a virtual environment
 if "%1"=="create" (
@@ -116,6 +116,12 @@ if "%1"=="remove" (
     exit /b 0
 )
 
+REM Function to update Python path in virtual environment
+if "%1"=="updatepy" (
+    call :do_updatepy %2
+    exit /b !errorlevel!
+)
+
 REM Function to display help information about the script
 if "%~1"=="--help" (
     call :display_help
@@ -142,6 +148,7 @@ echo list - list installed packages in the activated virtual environment
 echo freeze - Check all packages in the activated virtual environment and populate requirements.txt
 echo add [package-name] - Install and adds a package to requirements.txt
 echo remove [package-name] - Uninstall and removes a package from requirements.txt
+echo updatepy [path] - Update Python path in a virtual environment (default: .venv or venv)
 echo --help - Display this help information
 echo --version - Display the script version
 echo ---------
@@ -157,3 +164,58 @@ exit /b
 echo Invalid command. Use one of the following:
 call :display_help
 exit /b
+
+:do_updatepy
+set "venv_path=%~1"
+if "!venv_path!"=="" (
+    if exist ".venv\pyvenv.cfg" (
+        set "venv_path=.venv"
+    ) else if exist "venv\pyvenv.cfg" (
+        set "venv_path=venv"
+    ) else (
+        echo No virtual environment found in current directory.
+        echo Usage: virenv updatepy [venv_path]
+        exit /b 1
+    )
+)
+if not exist "!venv_path!\pyvenv.cfg" (
+    echo Error: '!venv_path!' is not a valid virtual environment.
+    exit /b 1
+)
+echo Updating Python path in virtual environment: !venv_path!
+echo ===============================
+echo.
+for /f "tokens=1,* delims==" %%a in ('findstr /i "^home" "!venv_path!\pyvenv.cfg"') do set "old_home=%%b"
+for /f "tokens=*" %%x in ("!old_home!") do set "old_home=%%x"
+echo Current Python home: !old_home!
+for /f "delims=" %%a in ('where python 2^>nul') do (
+    set "new_python=%%a"
+    goto :got_python
+)
+echo Error: Python not found in PATH.
+exit /b 1
+:got_python
+for %%F in ("!new_python!") do set "new_home=%%~dpF"
+if "!new_home:~-1!"=="\" set "new_home=!new_home:~0,-1!"
+echo New Python home:     !new_home!
+echo.
+if /i "!old_home!"=="!new_home!" (
+    echo Python path is already up to date. No changes needed.
+    exit /b 0
+)
+python -m venv --upgrade "!venv_path!"
+if !errorlevel! equ 0 (
+    echo.
+    echo Virtual environment updated successfully.
+) else (
+    echo.
+    echo Warning: --upgrade failed. Attempting manual pyvenv.cfg update...
+    powershell -Command "$cfg = '!venv_path!\pyvenv.cfg'; (Get-Content $cfg) -replace '^home\s*=.*', ('home = ' + '!new_home!') | Set-Content $cfg"
+    if !errorlevel! equ 0 (
+        echo pyvenv.cfg updated manually.
+    ) else (
+        echo Failed to update virtual environment.
+        exit /b 1
+    )
+)
+exit /b 0
