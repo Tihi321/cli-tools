@@ -45,7 +45,7 @@ Script for adding path is tested on Windows 11. Please backup your system' PATH 
 - `freeze` - Check all packages in the activated virtual environment and populate `requirements.txt`
 - `add [package-name]` - Installs and adds to `requirements.txt`
 - `remove [package-name]` - Uninstall and removes a package from `requirements.txt`
-- `updatepy [path]` - Update Python path in a virtual environment (defaults to `.venv` or `venv`)
+- `updatepy [path]` - Update Python path in a virtual environment (auto-detects if no path given)
 - `--help` - Display this help information
 - `--version` - Display the script version
 
@@ -77,7 +77,7 @@ virenv install
 
 #### Update Python path in virtual environment
 
-When your system Python path changes (e.g. after a Python upgrade), update the virtual environment to point to the new path:
+When your system Python path changes (e.g. after a Python upgrade), update the virtual environment to point to the new path. If no path is provided, it will search the current directory for a virtual environment, the same way `activate` does:
 
 ```sh
 virenv updatepy

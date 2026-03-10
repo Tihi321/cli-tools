@@ -148,7 +148,7 @@ echo list - list installed packages in the activated virtual environment
 echo freeze - Check all packages in the activated virtual environment and populate requirements.txt
 echo add [package-name] - Install and adds a package to requirements.txt
 echo remove [package-name] - Uninstall and removes a package from requirements.txt
-echo updatepy [path] - Update Python path in a virtual environment (default: .venv or venv)
+echo updatepy [path] - Update Python path in a virtual environment (auto-detects if no path given)
 echo --help - Display this help information
 echo --version - Display the script version
 echo ---------
@@ -168,16 +168,17 @@ exit /b
 :do_updatepy
 set "venv_path=%~1"
 if "!venv_path!"=="" (
-    if exist ".venv\pyvenv.cfg" (
-        set "venv_path=.venv"
-    ) else if exist "venv\pyvenv.cfg" (
-        set "venv_path=venv"
-    ) else (
-        echo No virtual environment found in current directory.
-        echo Usage: virenv updatepy [venv_path]
-        exit /b 1
+    for /d %%d in (*) do (
+        if exist "%%d\pyvenv.cfg" (
+            set "venv_path=%%d"
+            goto :found_venv
+        )
     )
+    echo No virtual environment found in current directory.
+    echo Usage: virenv updatepy [venv_path]
+    exit /b 1
 )
+:found_venv
 if not exist "!venv_path!\pyvenv.cfg" (
     echo Error: '!venv_path!' is not a valid virtual environment.
     exit /b 1
