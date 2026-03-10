@@ -189,11 +189,16 @@ echo.
 for /f "tokens=1,* delims==" %%a in ('findstr /i "^home" "!venv_path!\pyvenv.cfg"') do set "old_home=%%b"
 for /f "tokens=*" %%x in ("!old_home!") do set "old_home=%%x"
 echo Current Python home: !old_home!
+REM Resolve venv python absolute path so we can skip it in search results
+for %%F in ("!venv_path!\Scripts\python.exe") do set "venv_python=%%~fF"
+set "new_python="
 for /f "delims=" %%a in ('where python 2^>nul') do (
-    set "new_python=%%a"
-    goto :got_python
+    if /i not "%%a"=="!venv_python!" (
+        set "new_python=%%a"
+        goto :got_python
+    )
 )
-echo Error: Python not found in PATH.
+echo Error: No system Python found in PATH.
 exit /b 1
 :got_python
 for %%F in ("!new_python!") do set "new_home=%%~dpF"
